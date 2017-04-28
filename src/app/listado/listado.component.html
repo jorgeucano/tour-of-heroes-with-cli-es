@@ -1,7 +1,16 @@
-<h1>{{titulo}}</h1>
-<h3>{{heroe.id}} - {{heroe.nombre}}</h3>
-
-<div>
-  <label>nombre: </label>
-  <input [(ngModel)]="heroe.nombre" placeholder="nombre">
+<div *ngIf="heroeSeleccionado">
+  <h2>Detalle de {{heroeSeleccionado.nombre}}!</h2>
+  <div><label>id: </label>{{heroeSeleccionado.id}}</div>
+  <div>
+    <label>nombre: </label>
+    <input [(ngModel)]="heroeSeleccionado.nombre" placeholder="nombre"/>
+  </div>
 </div>
+
+<h3> Mis Heroes </h3>
+<ul class="heroes">
+  <!-- iterar nuestro heroes -->
+  <li *ngFor="let heroe of HEROES" (click)="seleccionar(heroe)" [class.selected]="heroe === heroeSeleccionado">
+    <span class="badge">{{heroe.id}}</span> {{heroe.nombre}}
+  </li>
+</ul>
