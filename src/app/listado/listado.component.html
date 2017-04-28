@@ -1,11 +1,4 @@
-<div *ngIf="heroeSeleccionado">
-  <h2>Detalle de {{heroeSeleccionado.nombre}}!</h2>
-  <div><label>id: </label>{{heroeSeleccionado.id}}</div>
-  <div>
-    <label>nombre: </label>
-    <input [(ngModel)]="heroeSeleccionado.nombre" placeholder="nombre"/>
-  </div>
-</div>
+<app-heroe-detalle [heroe]="heroeSeleccionado"></app-heroe-detalle>
 
 <h3> Mis Heroes </h3>
 <ul class="heroes">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Heroe } from '../heroe';
 
 @Component({
   selector: 'app-listado',
@@ -41,9 +42,4 @@ export class ListadoComponent implements OnInit {
     console.log(this.heroeSeleccionado);
   }
 
-}
-
-export class Heroe{
-  id: number;
-  nombre: string;
 }
