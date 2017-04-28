@@ -28,3 +28,12 @@ bootstrap: [AppComponent] => bootstrap: [ListadoComponentComponent]
 
 Modificamos el Index para que levante el tag de listado
 Modificamos los datos de listado para que muestre html bindeado
+
+
+#paso-03
+
+Creando la clase heroe y modificando datos 
+
+para modifcar a los heroes utilizamos en app.module.ts
+import { FormsModule }   from '@angular/forms'; 
+[(ngModel)]

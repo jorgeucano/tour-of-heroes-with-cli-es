@@ -8,11 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class ListadoComponent implements OnInit {
 
   titulo = 'Tour de heroes';
-  heroe = 'Tormenta';
+
+  heroe:Hereo = {
+    id : 1,
+    nombre: 'Tormenta'
+  }
 
   constructor() { }
 
   ngOnInit() {
   }
 
+}
+
+export class Hereo{
+  id: number;
+  nombre: string;
 }

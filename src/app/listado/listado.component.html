@@ -1,2 +1,7 @@
 <h1>{{titulo}}</h1>
-<h3>{{heroe}}</h3>
+<h3>{{heroe.id}} - {{heroe.nombre}}</h3>
+
+<div>
+  <label>nombre: </label>
+  <input [(ngModel)]="heroe.nombre" placeholder="nombre">
+</div>
