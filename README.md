@@ -1,5 +1,10 @@
 # TourOfHeroesEs
 
+# Instalación del CLI
+
+` npm install @angular/cli --save -g `
+
+
 Tags & explicación:
 
 # paso-01
