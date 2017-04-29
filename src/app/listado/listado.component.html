@@ -2,12 +2,12 @@
 <button (click)="getHeroesPromise()">Get Heroes Promise</button>
 <button (click)="getHeroesDelayPromise()"> Get Heroes Promise delay</button>
 
-<app-heroe-detalle [heroe]="heroeSeleccionado"></app-heroe-detalle>
-
 <h3> Mis Heroes </h3>
 <ul class="heroes">
   <!-- iterar nuestro heroes -->
   <li *ngFor="let heroe of HEROES" (click)="seleccionar(heroe)" [class.selected]="heroe === heroeSeleccionado">
-    <span class="badge">{{heroe.id}}</span> {{heroe.nombre}}
+    <a [routerLink]="['/detalle', heroe.id]">
+      <span class="badge">{{heroe.id}}</span> {{heroe.nombre}}
+    </a>
   </li>
 </ul>

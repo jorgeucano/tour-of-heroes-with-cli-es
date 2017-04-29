@@ -8,6 +8,10 @@ import { HeroeDetalleComponent } from './heroe-detalle/heroe-detalle.component';
 
 import { HeroeService } from './heroe.service';
 
+import { RouterModule }   from '@angular/router';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,9 +20,13 @@ import { HeroeService } from './heroe.service';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+      { path: 'heroes', component: ListadoComponent },
+      { path: 'detalle/:id', component: HeroeDetalleComponent }
+    ])
   ],
   providers: [HeroeService],
-  bootstrap: [ListadoComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

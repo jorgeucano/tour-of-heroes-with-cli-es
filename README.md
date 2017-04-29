@@ -116,7 +116,7 @@ installing service
 
   Vamos a ver que tenemos un WARNING que nos avisa que no lo agrego a providers... Los servicios los podemos agregar en providers ( no es obligatorio ) dentro del app.module... en nuestro caso lo vamos a realizar y el @NgModule va a quedar asi
 
-`
+`---------`
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,7 +129,7 @@ installing service
   ],
   providers: [HeroeService],
   bootstrap: [ListadoComponent]
-`
+`---------`
 
 
 Ahora que tenemos creado el servicio vamos a trabajar sobre el...
@@ -138,7 +138,7 @@ Vamos a ver que importa  " Injectable " quien nos va a dejar poder utilizar y ma
 Antes de arrancar con el servicio vamos a crear un mockup de datos para poder consumirlo.
 Para ello, vamos a crear una carpeta llamada mockups y dentro el archivo llamado mock-heroes.ts
 
-`
+`---------`
 import { Heroe } from '../heroe';
 export const HEROES: Heroe[] = [
   {id: 11, nombre: 'Mr. Nice'},
@@ -152,7 +152,7 @@ export const HEROES: Heroe[] = [
   {id: 19, nombre: 'Magma'},
   {id: 20, nombre: 'Tornado'}
 ];
-`
+`---------`
 
 
 Ahora que tenemos nuestro injectable ( ver archivo hore.service.ts ) vamos a llamarlo donde lo necesitamos para no harcodear datos en los componentes
@@ -167,3 +167,86 @@ Luego lo podemos llamar en el ngOnInit => que es cuando se inicia el componente 
 
 Tambien se puede ver que traemos a los Heroes en distintas formas, para eso podes ver el archivo hore.service.ts
 Que vamos a tener llamadas con promise y con delay para "simular" a una ida y vuelta del servidor
+
+# paso-07
+# Ruteo de nuestra aplicación
+
+Vamos a dividir nuestro componente listado Ahora
+
+app.component => sera nuestra vista principal
+listado.component => sera nuestro listado maestro
+heroes-detalle.component => sera nuestro detail
+
+Para ello vamos a modificar el index.html
+`---------`
+<app-listado>Loading...</app-listado> 
+`---------`
+por
+`---------`
+<heroes-app><img src="https://cdn-images-1.medium.com/max/800/1*1LufzuvnUabrvKL9yp6LMQ.gif"></img><heroes-app>
+`---------`
+En nuestra app.module.ts vamos a cambiar el componente en el cual arranca o sea el bootstrap a AppComponent y en AppComponent vamos a cambiar el selector a heroes-app
+
+De esta forma ya tenemos nuestra base en app.component
+
+Ahora lo que vamos a hacer es crear el router, para ello vamos a hacer una serie de pasos:
+
+<ul>
+    <li> Agregar en el head (index.html) el siguiente tag '<base href="/">'</li>
+    <li> Importar el routerModule en el app.module</li>
+    <li> Declarar RouterModule en nuestro import (ngModule) </li>
+    <li> Agregamos el forRoot a nuestro archivo para configurar las rutas 
+   `---------`
+    imports: [
+        BrowserModule,
+        FormsModule,
+        RouterModule.forRoot([
+        { path: 'heroes', component: ListadoComponent }
+        ])
+    ],
+   `---------`
+   </li>
+</ul>
+
+Con estos pasos vamos a tener la primera parte del routeo.
+
+Pero no queda todo ahora.. recuerden que nuestro app.component solo tiene un Hello World... vamos a cambiar eso por un menu, vamos a modificar nuestro html por este =>
+
+`---------`
+<h1>{{title}}</h1>
+<a routerLink="/heroes">Heroes</a>
+<router-outlet></router-outlet>
+`---------`
+
+
+Ahora que vemos como funciona el route, vamos a cambiar a heroes-detalle para que obtenga el parametro de la url en una ruta distinta y no dependa del componente listado.
+
+Para eso primero vamos a agregar la nueva ruta:
+`---------`
+{ path: 'detalle/:id', component: HeroeDetalleComponent }
+`---------`
+
+Borramos el tag del componente en listado.component
+
+Y a nuestro HeroeDetalleComponent vamos a agregar los siguientes imports
+
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params }   from '@angular/router';
+import { Location }                 from '@angular/common';
+import { HeroService } from './hero.service';
+
+Ademas vamos a importar switchMap para poder manejar los parametros como observables
+
+`import 'rxjs/add/operator/switchMap';`
+
+y agregamos en nuestro ngOnInit la llamada a nuestro servicio para obtener el heroe, pero con algunos cambios:
+
+`-----------------`
+this.route.params
+    .switchMap((params: Params) => this.heroService.getHero(+params['id']))
+    .subscribe(hero `> this.hero = hero);
+`-------------------`
+
+Agregaremos una funcion para obtener un heroe dependiendo del ID en el servicio (ver en heroe.service)
+Y luego haremos el routeo y el volver => ver en listado.component y heroe-detalle.component
+

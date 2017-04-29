@@ -25,6 +25,11 @@ export class HeroeService {
       setTimeout(() => resolve(this.getHeroes()), 2000);
     });
   }
+
+  getHeroesConParametro(id:number):Promise<Heroe>{
+    return this.getHeroesPromise().then(heroes => heroes.find(hero => hero.id === id));
+  }
+  
   
 
 
