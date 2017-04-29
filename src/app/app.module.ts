@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ListadoComponent } from './listado/listado.component';
 import { HeroeDetalleComponent } from './heroe-detalle/heroe-detalle.component';
 
+import { HeroeService } from './heroe.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,7 @@ import { HeroeDetalleComponent } from './heroe-detalle/heroe-detalle.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [HeroeService],
   bootstrap: [ListadoComponent]
 })
 export class AppModule { }

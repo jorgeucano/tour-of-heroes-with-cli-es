@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Heroe } from '../heroe';
 
+import { HeroeService } from '../heroe.service';
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -16,25 +18,27 @@ export class ListadoComponent implements OnInit {
   }
 
   heroeSeleccionado: Heroe;
+  HEROES: Heroe[];
 
-
-  HEROES: Heroe[] = [
-    { id: 11, nombre: 'Mr. Nice' },
-    { id: 12, nombre: 'Narco' },
-    { id: 13, nombre: 'Bombasto' },
-    { id: 14, nombre: 'Celeritas' },
-    { id: 15, nombre: 'Magneta' },
-    { id: 16, nombre: 'RubberMan' },
-    { id: 17, nombre: 'Dynama' },
-    { id: 18, nombre: 'Dr IQ' },
-    { id: 19, nombre: 'Magma' },
-    { id: 20, nombre: 'Tornado' }
-  ];
-
-  constructor() { 
+  constructor(private heroeService: HeroeService) { 
   }
 
   ngOnInit() {
+    // this.HEROES = this.heroeService.getHeroes();
+  }
+
+  getHeroes():void{
+    this.HEROES = this.heroeService.getHeroes();
+  }
+
+  // get con promesa
+  getHeroesPromise(): void {
+    this.heroeService.getHeroesPromise().then(heroes => this.HEROES = heroes);
+  }
+
+  // get con promesa y delay 2 segundos
+  getHeroesDelayPromise():void{
+    this.heroeService.getHeroesDelayPromise().then(heroes => this.HEROES = heroes);
   }
 
   seleccionar(heroe:Heroe){

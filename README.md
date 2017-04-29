@@ -65,7 +65,7 @@ en nuestro tag li
 
 
 # paso-05
-#Componente Multiples
+# Componente Multiples
 
 ahora que ya tenemos el listado completo, deberiamos tener un componente aparte aparte para el detalle... 
 
@@ -100,3 +100,70 @@ El tag es el generado por el componente, lo que esta entre corchetes es el param
 Lo que nos queda hacer, es que nuestro componente detalle pueda obtener parametros al ser inicializado, para eso vamos a importar desde nuestro componente a Input y luego indicar que el "Input" que va a recibir es heroe
 
 @Input() heroe: Heroe;
+
+# paso-06
+# Servicios
+
+Vamos a crear un servicio para Heroes para poder consumir desde cualquier componente
+Para ello vamos a ejecutar:
+
+`ng g service heroe`
+
+installing service
+  create src/app/heroe.service.spec.ts
+  create src/app/heroe.service.ts
+  WARNING Service is generated but not provided, it must be provided to be used
+
+  Vamos a ver que tenemos un WARNING que nos avisa que no lo agrego a providers... Los servicios los podemos agregar en providers ( no es obligatorio ) dentro del app.module... en nuestro caso lo vamos a realizar y el @NgModule va a quedar asi
+
+`
+@NgModule({
+  declarations: [
+    AppComponent,
+    ListadoComponent,
+    HeroeDetalleComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: [HeroeService],
+  bootstrap: [ListadoComponent]
+`
+
+
+Ahora que tenemos creado el servicio vamos a trabajar sobre el...
+Vamos a ver que importa  " Injectable " quien nos va a dejar poder utilizar y mantenerlo como un singleton sobre toda nuestra app..
+
+Antes de arrancar con el servicio vamos a crear un mockup de datos para poder consumirlo.
+Para ello, vamos a crear una carpeta llamada mockups y dentro el archivo llamado mock-heroes.ts
+
+`
+import { Heroe } from '../heroe';
+export const HEROES: Heroe[] = [
+  {id: 11, nombre: 'Mr. Nice'},
+  {id: 12, nombre: 'Narco'},
+  {id: 13, nombre: 'Bombasto'},
+  {id: 14, nombre: 'Celeritas'},
+  {id: 15, nombre: 'Magneta'},
+  {id: 16, nombre: 'RubberMan'},
+  {id: 17, nombre: 'Dynama'},
+  {id: 18, nombre: 'Dr IQ'},
+  {id: 19, nombre: 'Magma'},
+  {id: 20, nombre: 'Tornado'}
+];
+`
+
+
+Ahora que tenemos nuestro injectable ( ver archivo hore.service.ts ) vamos a llamarlo donde lo necesitamos para no harcodear datos en los componentes
+
+ver => listado.component.ts 
+
+constructor(private heroeService: HeroeService) { }
+
+Esto lo que va a hacer es traer a nuestro servicio y ya asignarlo a una variable (recordemos que es un singleton por lo tanto lo vamos a tener vivo mientras este vivo el tag)
+
+Luego lo podemos llamar en el ngOnInit => que es cuando se inicia el componente ( lo deje comentado ) o tambien lo podemos llamar a travez de una funcion para cuando tengamos la necesidad de traer los datos (en el boton getHeroes() ).
+
+Tambien se puede ver que traemos a los Heroes en distintas formas, para eso podes ver el archivo hore.service.ts
+Que vamos a tener llamadas con promise y con delay para "simular" a una ida y vuelta del servidor
