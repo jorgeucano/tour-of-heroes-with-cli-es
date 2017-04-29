@@ -250,3 +250,24 @@ this.route.params
 Agregaremos una funcion para obtener un heroe dependiendo del ID en el servicio (ver en heroe.service)
 Y luego haremos el routeo y el volver => ver en listado.component y heroe-detalle.component
 
+# paso-08
+# Refactor router
+
+Ahora que tenemos todo funcionando, nos daremos cuenta que el ngModule no quedo muy "bonito" y hay muchas cosas que podrian no estar ahi, para eso vamos a hacer las siguiente modificaciones:
+
+Vamos a crear una constante para manejar las rutas
+
+`const routes: Routes`
+`
+Y para que esto funcione, tambien vamos a tener que importar 'Routes' del mismo lugar que importamos el modulo de ruteo
+
+Y vamos a agrega
+`exports: [ RouterModule ]`
+
+El módulo de enrutamiento agrega RouterModule a las exportaciones para que los componentes del módulo complementario tengan acceso de enrutador declarable, como RouterLink y RouterOutlet.
+
+Dentro de nuestro listado.component tenemos un ruteo por medio de un link, esto tambien se puede hacer por medio de una funcion, para ello agregaremos un funcion para la redirección
+
+ver listado.component.ts funcion verHereo()
+
+

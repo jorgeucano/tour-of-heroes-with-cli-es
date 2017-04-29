@@ -3,6 +3,8 @@ import { Heroe } from '../heroe';
 
 import { HeroeService } from '../heroe.service';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -20,7 +22,7 @@ export class ListadoComponent implements OnInit {
   heroeSeleccionado: Heroe;
   HEROES: Heroe[];
 
-  constructor(private heroeService: HeroeService) { 
+  constructor(private router: Router, private heroeService: HeroeService) { 
   }
 
   ngOnInit() {
@@ -44,6 +46,11 @@ export class ListadoComponent implements OnInit {
   seleccionar(heroe:Heroe){
     this.heroeSeleccionado = heroe;
     console.log(this.heroeSeleccionado);
+    this.verHeroe();
+  }
+
+  verHeroe(): void {
+    this.router.navigate(['/detail', this.heroeSeleccionado.id]);
   }
 
 }

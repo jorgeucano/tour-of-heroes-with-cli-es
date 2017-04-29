@@ -8,9 +8,12 @@ import { HeroeDetalleComponent } from './heroe-detalle/heroe-detalle.component';
 
 import { HeroeService } from './heroe.service';
 
-import { RouterModule }   from '@angular/router';
+import { RouterModule, Routes }   from '@angular/router';
 
-
+const routes: Routes = [
+      { path: 'heroes', component: ListadoComponent },
+      { path: 'detalle/:id', component: HeroeDetalleComponent }
+    ];
 
 @NgModule({
   declarations: [
@@ -21,11 +24,9 @@ import { RouterModule }   from '@angular/router';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: 'heroes', component: ListadoComponent },
-      { path: 'detalle/:id', component: HeroeDetalleComponent }
-    ])
+    RouterModule.forRoot(routes)
   ],
+  exports: [ RouterModule ],
   providers: [HeroeService],
   bootstrap: [AppComponent]
 })
