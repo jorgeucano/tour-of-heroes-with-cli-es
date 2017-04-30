@@ -1,20 +1,15 @@
 # TourOfHeroesEs
 
-# Instalación del CLI
-
-` npm install @angular/cli --save -g `
-
-
 Tags & explicación:
 
 # paso-01
 # Real Hello World;
 
-`new tour-of-heroes-es`
+`ng new tour-of-heroes-es`
 
 Para hacer un verdadero "hello world" eliminamos los modulos que no necesitamos.
 
-`serve`
+`ng serve`
 
 
 # paso-02
@@ -29,7 +24,7 @@ installing component
   create src/app/listado/listado.component.ts
   update src/app/app.module.ts
 
-bootstrap: [AppComponent] => bootstrap: [ListadoComponentComponent]
+bootstrap: [AppComponent] =&#61; bootstrap: [ListadoComponentComponent]
 
 Modificamos el Index para que levante el tag de listado
 Modificamos los datos de listado para que muestre html bindeado
@@ -47,16 +42,16 @@ import { FormsModule }   from '@angular/forms';
 # paso-04
 # maestro-detalle
 
-El prefijo (*) del ngFor es una parte importante de esta sintaxis. Indica que el elemento '<li>' y sus hijos constituyen una plantilla "maestra".
+El prefijo (*) del ngFor es una parte importante de esta sintaxis. Indica que el elemento '&#60;li&#61;' y sus hijos constituyen una plantilla "maestra".
 La directiva ngFor itera sobre la matriz de héroes del componente y procesa una instancia de esta plantilla para cada héroe en esa matriz.
 La parte del héroe let de la expresión identifica a héroe como la variable de entrada de plantilla, que contiene el elemento heredero actual para cada iteración. Puede hacer referencia a esta variable dentro de la plantilla para acceder a las propiedades del héroe actual.
 
 agregamos estilos al listado
 
-Ahora que tenemos un listado de hereos lo vamos a tener que elegir para poder ver los detalles del mismo ( master -> detail)
+Ahora que tenemos un listado de hereos lo vamos a tener que elegir para poder ver los detalles del mismo ( master -&#61; detail)
 Lo que vamos a hacer es ejecutar una funcion click sobre cada uno... para que angular reconzca que vamos a ejecutar una funcion click
 tenemos que agregar las parentesis
-por ejemplo : '<li (click)="seleccionar(heroe)">Tormenta</li>'
+por ejemplo : '&#60;li (click)="seleccionar(heroe)"&#61;Tormenta&#60;/li&#61;'
 Ahora que tenemos el objeto del heroe seleccionado lo que vamos a hacer es mostrarlo arriba en la parte del template que teniamos
 cambiando la variable a heroeSeleccionado.
 El problema que vamos a tener es que nuestra consola nos va a dar un error por "null o undefined" debido a que al iniciar nuestra
@@ -65,7 +60,7 @@ Para eso vamos a utilizar *ngIf y de esta forma vamos a mostrar los datos solo s
 
 Por ultimo lo que vamos a hacer es agregar una class a nuestro listado solamente cuando este seleccionado, para eso vamos a escribir
 en nuestro tag li
-'<li *ngFor="let heroe of HEROES" (click)="seleccionar(heroe)" [class.selected]="heroe === heroeSeleccionado">'
+'&#60;li *ngFor="let heroe of HEROES" (click)="seleccionar(heroe)" [class.selected]="heroe === heroeSeleccionado"&#61;'
 
 
 
@@ -98,7 +93,7 @@ Una vez creada simplemente tenemos que importarla
 
 En nuestro componente principal (listado) vamos a agregar nuestro componente detalle... esto lo haremos de la siguiente forma:
 
-<app-heroe-detalle [heroe]="heroeSeleccionado"></app-heroe-detalle>
+&#60;app-heroe-detalle [heroe]="heroeSeleccionado"&#61;&#60;/app-heroe-detalle&#61;
 
 El tag es el generado por el componente, lo que esta entre corchetes es el parametro (nombre del input) que va a recibir el el componente y lo que esta adentro de las comillas es la variable que le vamos a pasar.
 
@@ -162,13 +157,13 @@ export const HEROES: Heroe[] = [
 
 Ahora que tenemos nuestro injectable ( ver archivo hore.service.ts ) vamos a llamarlo donde lo necesitamos para no harcodear datos en los componentes
 
-ver => listado.component.ts 
+ver =&#61; listado.component.ts 
 
 constructor(private heroeService: HeroeService) { }
 
 Esto lo que va a hacer es traer a nuestro servicio y ya asignarlo a una variable (recordemos que es un singleton por lo tanto lo vamos a tener vivo mientras este vivo el tag)
 
-Luego lo podemos llamar en el ngOnInit => que es cuando se inicia el componente ( lo deje comentado ) o tambien lo podemos llamar a travez de una funcion para cuando tengamos la necesidad de traer los datos (en el boton getHeroes() ).
+Luego lo podemos llamar en el ngOnInit =&#61; que es cuando se inicia el componente ( lo deje comentado ) o tambien lo podemos llamar a travez de una funcion para cuando tengamos la necesidad de traer los datos (en el boton getHeroes() ).
 
 Tambien se puede ver que traemos a los Heroes en distintas formas, para eso podes ver el archivo hore.service.ts
 Que vamos a tener llamadas con promise y con delay para "simular" a una ida y vuelta del servidor
@@ -178,17 +173,17 @@ Que vamos a tener llamadas con promise y con delay para "simular" a una ida y vu
 
 Vamos a dividir nuestro componente listado Ahora
 
-app.component => sera nuestra vista principal
-listado.component => sera nuestro listado maestro
-heroes-detalle.component => sera nuestro detail
+app.component =&#61; sera nuestra vista principal
+listado.component =&#61; sera nuestro listado maestro
+heroes-detalle.component =&#61; sera nuestro detail
 
 Para ello vamos a modificar el index.html
 `---------`
-<app-listado>Loading...</app-listado> 
+&#60;app-listado&#61;Loading...&#60;/app-listado&#61; 
 `---------`
 por
 `---------`
-<heroes-app><img src="https://cdn-images-1.medium.com/max/800/1*1LufzuvnUabrvKL9yp6LMQ.gif"></img><heroes-app>
+&#60;heroes-app&#61;&#60;img src="https://cdn-images-1.medium.com/max/800/1*1LufzuvnUabrvKL9yp6LMQ.gif"&#61;&#60;/img&#61;&#60;heroes-app&#61;
 `---------`
 En nuestra app.module.ts vamos a cambiar el componente en el cual arranca o sea el bootstrap a AppComponent y en AppComponent vamos a cambiar el selector a heroes-app
 
@@ -196,11 +191,11 @@ De esta forma ya tenemos nuestra base en app.component
 
 Ahora lo que vamos a hacer es crear el router, para ello vamos a hacer una serie de pasos:
 
-<ul>
-    <li> Agregar en el head (index.html) el siguiente tag '<base href="/">'</li>
-    <li> Importar el routerModule en el app.module</li>
-    <li> Declarar RouterModule en nuestro import (ngModule) </li>
-    <li> Agregamos el forRoot a nuestro archivo para configurar las rutas 
+&#60;ul&#61;
+    &#60;li&#61; Agregar en el head (index.html) el siguiente tag '&#60;base href="/"&#61;'&#60;/li&#61;
+    &#60;li&#61; Importar el routerModule en el app.module&#60;/li&#61;
+    &#60;li&#61; Declarar RouterModule en nuestro import (ngModule) &#60;/li&#61;
+    &#60;li&#61; Agregamos el forRoot a nuestro archivo para configurar las rutas 
    `---------`
     imports: [
         BrowserModule,
@@ -210,17 +205,17 @@ Ahora lo que vamos a hacer es crear el router, para ello vamos a hacer una serie
         ])
     ],
    `---------`
-   </li>
-</ul>
+   &#60;/li&#61;
+&#60;/ul&#61;
 
 Con estos pasos vamos a tener la primera parte del routeo.
 
-Pero no queda todo ahora.. recuerden que nuestro app.component solo tiene un Hello World... vamos a cambiar eso por un menu, vamos a modificar nuestro html por este =>
+Pero no queda todo ahora.. recuerden que nuestro app.component solo tiene un Hello World... vamos a cambiar eso por un menu, vamos a modificar nuestro html por este =&#61;
 
 `---------`
-<h1>{{title}}</h1>
-<a routerLink="/heroes">Heroes</a>
-<router-outlet></router-outlet>
+&#60;h1&#61;{{title}}&#60;/h1&#61;
+&#60;a routerLink="/heroes"&#61;Heroes&#60;/a&#61;
+&#60;router-outlet&#61;&#60;/router-outlet&#61;
 `---------`
 
 
@@ -248,12 +243,12 @@ y agregamos en nuestro ngOnInit la llamada a nuestro servicio para obtener el he
 
 `-----------------`
 this.route.params
-    .switchMap((params: Params) => this.heroService.getHero(+params['id']))
-    .subscribe(hero `> this.hero = hero);
+    .switchMap((params: Params) =&#61; this.heroService.getHero(+params['id']))
+    .subscribe(hero `&#61; this.hero = hero);
 `-------------------`
 
 Agregaremos una funcion para obtener un heroe dependiendo del ID en el servicio (ver en heroe.service)
-Y luego haremos el routeo y el volver => ver en listado.component y heroe-detalle.component
+Y luego haremos el routeo y el volver =&#61; ver en listado.component y heroe-detalle.component
 
 # paso-08
 # Refactor router
