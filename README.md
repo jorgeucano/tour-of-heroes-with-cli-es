@@ -1,5 +1,10 @@
 # TourOfHeroesEs
 
+Extensiones VSC:
+  https://marketplace.visualstudio.com/items?itemName=Angular.ng-template
+  https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2
+  
+
 Tags & explicación:
 
 # paso-01
